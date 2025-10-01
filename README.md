@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
 ## Getting Started
 
 First, run the development server:
@@ -29,8 +27,72 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+└── 📁cogito-web-calendar
+    └── 📁public
+        └── 📁images              # Event images, logos
+    └── 📁src
+        └── 📁app
+            ├── 📁calendar
+            │   ├── page.tsx      # Main calendar view
+            │   └── layout.tsx    # Calendar-specific layout
+            ├── 📁events
+            │   ├── 📁[id]
+            │   │   └── page.tsx  # Individual event detail page
+            │   ├── page.tsx      # Events list view (optional)
+            │   └── loading.tsx   # Loading state
+            ├── 📁api
+            │   └── 📁events
+            │       └── route.ts  # API endpoint for events
+            ├── favicon.ico
+            ├── globals.css
+            ├── layout.tsx        # Root layout
+            └── page.tsx          # Homepage (redirect to calendar)
+        └── 📁components
+            └── 📁calendar
+                ├── CalendarView.tsx
+                ├── CalendarNavigation.tsx
+                ├── CalendarEventItem.tsx
+                ├── CalendarDay.tsx
+                ├── CalendarLegend.tsx
+                └── CalendarSkeleton.tsx
+            └── 📁events
+                ├── EventCard.tsx
+                ├── EventDetailCard.tsx
+                ├── EventFilters.tsx
+                └── EventRegistrationButton.tsx
+            └── 📁ui              # shadcn/ui components
+                ├── button.tsx
+                ├── card.tsx
+                ├── badge.tsx
+                ├── hover-card.tsx
+                ├── dialog.tsx
+                └── ...
+        └── 📁lib
+            ├── utils.ts          # cn() utility and helpers
+            ├── 📁calendar
+            │   ├── calendar-helpers.ts
+            │   └── event-positioning.ts
+            └── 📁api
+                └── events.ts
+        └── 📁types
+            ├── event.ts
+            └── calendar.ts
+        └── 📁hooks
+            ├── use-calendar.ts
+            ├── use-events.ts
+            └── use-media-query.ts
+        └── 📁data
+            └── mock-events.ts    # Sample data for development
+    ├── .env.local
+    ├── .gitignore
+    ├── components.json           # shadcn/ui config
+    ├── eslint.config.mjs
+    ├── next.config.ts
+    ├── package.json
+    ├── postcss.config.mjs
+    ├── README.md
+    └── tsconfig.json
+```

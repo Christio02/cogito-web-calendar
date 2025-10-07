@@ -1,5 +1,6 @@
 import { getCalendarDays } from "@/lib/calendar/calendar-helpers"
 import { isToday } from "date-fns"
+import CalendarLegend from "./CalendarLegend"
 
 export default function ({year, month}: {year: number, month: number}){
     const day_labels = ["Man", "Tir", "Ons", "Tor", "Fre", "Lør", "Søn"]
@@ -8,6 +9,10 @@ export default function ({year, month}: {year: number, month: number}){
         <>
         <section className="px-4">
        
+        <CalendarLegend eventType="workshop" />
+
+
+
         <div className="grid grid-cols-7 gap-px bg-gray-200 border border-gray-200">
 
             

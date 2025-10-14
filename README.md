@@ -77,7 +77,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
             │   └── event-positioning.ts
             └── 📁api
                 └── events.ts
-        └── 📁types
+        └── 📁interfaces
             ├── event.ts
             └── calendar.ts
         └── 📁hooks

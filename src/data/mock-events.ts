@@ -229,6 +229,8 @@ export function toCalendarEventItems(
         id: event.id,
         name: event.name,
         type: event.type,
+        time: event.time,
+        location: event.location,
         color: getEventColor(event.type) ?? "bg-red-500",
     }));
 }

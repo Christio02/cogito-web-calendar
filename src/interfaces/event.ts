@@ -21,6 +21,8 @@ export interface Event {
 export interface CalendarEventItemProps {
     id: number;
     name: string;
+    time: string;
+    location: string;
     color: string;
     isSingle?: boolean;
 }

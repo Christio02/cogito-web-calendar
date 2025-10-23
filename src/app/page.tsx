@@ -38,16 +38,21 @@ export default function Home() {
         setMonth(today.getMonth());
     };
 
+    console.log("Month:", month);
+
     return (
-        <main className="container mx-auto py-8">
-            <CalendarNavigation
-                year={year}
-                month={month}
-                onPreviousMonth={handlePreviousMonth}
-                onNextMonth={handleNextMonth}
-                onToday={handleToday}
-            />
-            <CalendarView year={year} month={month} />
+        <main className="min-h-screen bg-gradient-to-b from-[#13395b] to-[#1a4a7a] py-5 px-4">
+            <section className="bg-white rounded-3xl shadow-2xl p-8 mb-8">
+                <CalendarNavigation
+                    year={year}
+                    month={month}
+                    onPreviousMonth={handlePreviousMonth}
+                    onNextMonth={handleNextMonth}
+                    onToday={handleToday}
+                />
+
+                <CalendarView year={year} month={month} />
+            </section>
         </main>
     );
 }

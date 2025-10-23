@@ -1,5 +1,7 @@
+"use client";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
+import { motion } from "framer-motion";
 
 interface CalendarNavigationProps {
     year: number;
@@ -37,39 +39,58 @@ export default function CalendarNavigation({
     };
 
     return (
-        <section className="flex flex-row items-center justify-between mb-6 px-4">
-            <div>
+        <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: [0, 0.71, 0.2, 1.0] }}
+            className="flex flex-row tablet:flex-row items-center justify-between mb-8 px-4 gap-4"
+        >
+            {/* Left: Previous Month Button */}
+            <div className="flex items-center gap-3">
                 <Button
-                    className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition"
                     onClick={onPreviousMonth}
-                    aria-label="Previous month"
+                    aria-label="Forrige måned"
+                    className="group relative h-12 w-12 rounded-xl bg-[#13395b] hover:bg-[#1a4a7a] text-white shadow-md hover:shadow-lg transition-all duration-300 border-0 p-0"
                 >
-                    <ArrowLeft />
+                    <ArrowLeft className="h-5 w-5 transition-transform group-hover:-translate-x-0.5" />
                 </Button>
             </div>
-            <div>
-                <h1 className="text-3xl font-bold">{monthNames[month]}</h1>
+
+            {/* Center: Month/Year Display + Today Button */}
+            <div className="flex flex-col tablet:flex-row items-center gap-4">
+                <div className="flex items-center gap-3">
+                    <h1 className="text-3xl tablet:text-4xl font-bold text-[#13395b] tracking-wide">
+                        {monthNames[month]} {year}
+                    </h1>
+                </div>
+
+                <Button
+                    onClick={onToday}
+                    disabled={isCurrentMonth()}
+                    className={`
+                             px-6 py-3 h-12 rounded-xl font-semibold text-base
+                             transition-all duration-300 shadow-md
+                             ${
+                                 isCurrentMonth()
+                                     ? "bg-gray-300 text-gray-500 cursor-not-allowed opacity-60 shadow-none"
+                                     : "bg-[#ff4757] hover:bg-[#ff3545] text-white hover:shadow-lg hover:scale-105"
+                             }
+                         `}
+                >
+                    I dag
+                </Button>
             </div>
 
-            <button
-                onClick={onToday}
-                disabled={isCurrentMonth()}
-                className={`px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition ${
-                    isCurrentMonth() ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-            >
-                I dag
-            </button>
-
-            <div>
+            {/* Right: Next Month Button */}
+            <div className="flex items-center gap-3">
                 <Button
                     onClick={onNextMonth}
-                    className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 transition"
-                    aria-label="Next month"
+                    aria-label="Neste måned"
+                    className="group relative h-12 w-12 rounded-xl bg-[#13395b] hover:bg-[#1a4a7a] text-white shadow-md hover:shadow-lg transition-all duration-300 border-0 p-0"
                 >
-                    <ArrowRight />
+                    <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
                 </Button>
             </div>
-        </section>
+        </motion.div>
     );
 }

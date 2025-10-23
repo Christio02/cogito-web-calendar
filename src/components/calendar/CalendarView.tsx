@@ -6,9 +6,12 @@ import {
     getEventColor,
 } from "@/lib/calendar/calendar-helpers";
 import { isSameDay, isToday } from "date-fns";
-import { Event } from "../../interfaces/event";
+import { Event, EventType } from "../../interfaces/event";
 import CalendarEventItem from "./CalendarEventItem";
 import CalendarLegend from "./CalendarLegend";
+import { isSameMonth } from "date-fns/fp";
+
+export type EventTypeCountMap = Record<EventType, number>;
 
 export default function CalendarView({
     year,
@@ -19,12 +22,22 @@ export default function CalendarView({
 }) {
     const day_labels = ["Man", "Tir", "Ons", "Tor", "Fre", "Lør", "Søn"];
     const calendar_days = getCalendarDays(year, month);
+
+    const mappedEventTypes: EventTypeCountMap = mockEvents
+        .filter((event) => isSameMonth(event.date, new Date(year, month)))
+        .reduce((accumulator: EventTypeCountMap, event: Event) => {
+            const key: EventType = event.type;
+            accumulator[key] = (accumulator[key] || 0) + 1;
+
+            return accumulator;
+        }, {} as EventTypeCountMap);
+
     return (
         <>
-            <section className="px-4">
-                <CalendarLegend eventType="nyhet" />
+            <div className="px-4">
+                <CalendarLegend eventTypeCountMap={mappedEventTypes} />
 
-                <div className="grid grid-cols-7 grid-auto-rows gap-px bg-gray-200 border border-gray-200">
+                <div className="grid grid-cols-7 grid-auto-rows bg-gray-200 ">
                     {day_labels.map((day, i) => (
                         <div
                             className="mr-4 bg-gray-100 p-2 text-center font-semibold text-sm"
@@ -36,7 +49,7 @@ export default function CalendarView({
 
                     {calendar_days.map((day, i) => {
                         // Filter events for this specific day
-                        const dayEvents = mockEvents
+                        const dayEvents: Event[] = mockEvents
                             .filter((event) => isSameDay(event.date, day.date))
                             .sort((a, b) => {
                                 // 10:00 - 20:00
@@ -66,11 +79,14 @@ export default function CalendarView({
                                 </div>
 
                                 {dayEvents.length === 1 ? (
+                                    // setCurrentEvent(dayEvents[0].type)
                                     <div className="flex-1">
                                         <CalendarEventItem
                                             key={dayEvents[0].id}
                                             id={dayEvents[0].id}
                                             name={dayEvents[0].name}
+                                            time={dayEvents[0].time}
+                                            location={dayEvents[0].location}
                                             color={
                                                 getEventColor(
                                                     dayEvents[0].type,
@@ -92,6 +108,8 @@ export default function CalendarView({
                                                     key={event.id}
                                                     id={event.id}
                                                     name={event.name}
+                                                    time={event.time}
+                                                    location={event.location}
                                                     color={color}
                                                     isSingle={false}
                                                 />
@@ -103,7 +121,7 @@ export default function CalendarView({
                         );
                     })}
                 </div>
-            </section>
+            </div>
         </>
     );
 }

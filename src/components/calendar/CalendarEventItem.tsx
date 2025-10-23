@@ -19,7 +19,7 @@ export default function CalendarEventItem({
     const router = useRouter();
 
     const handleNavigation = () => {
-        router.push(`events/${id}`);
+        router.push(`/events/${id}`);
     };
 
     return (

@@ -35,3 +35,14 @@ export function getCalendarDays(year: number, month: number) {
 export function getEventColor(eventType: EventType): string | undefined {
     return eventTypes.find((type) => type.key === eventType)?.color;
 }
+export function getEventTypeLabel(type: EventType): string {
+    const labels: Record<EventType, string> = {
+        workshop: "Workshop",
+        nyhet: "Nyhet",
+        hackathon: "Hackathon",
+        blogpost: "Bloggpost",
+        møte: "Møte",
+        annet: "Annet",
+    };
+    return labels[type] || type;
+}

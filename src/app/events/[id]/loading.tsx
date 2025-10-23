@@ -1,7 +1,8 @@
+"use client";
 import ReactLoading from "react-loading";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
-const Loading = () => {
+export default function Loading() {
     return (
         <>
             <motion.div
@@ -55,6 +56,4 @@ const Loading = () => {
             </motion.div>
         </>
     );
-};
-
-export default Loading;
+}

@@ -2,7 +2,7 @@
 
 import { EventType } from "@/interfaces/event";
 import { eventTypes } from "@/lib/calendar/calendar-helpers";
-import { EventTypeCountMap } from "./CalendarView";
+import { EventTypeCountMap } from "./CalendarGrid";
 
 type CalendarLegendProps = {
     className?: string;

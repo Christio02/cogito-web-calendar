@@ -1,5 +1,4 @@
 import { mockEvents } from "@/data/mock-events";
-import { Event } from "@/interfaces/event";
 
 export default async function Page({
     params,

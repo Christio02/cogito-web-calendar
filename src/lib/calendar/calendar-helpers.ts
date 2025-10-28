@@ -1,4 +1,5 @@
-import { EventType } from "@/interfaces/event";
+import { mockEvents } from "@/data/mock-events";
+import { Event, EventType } from "@/interfaces/event";
 import {
     eachDayOfInterval,
     endOfMonth,
@@ -7,6 +8,7 @@ import {
     startOfMonth,
     startOfWeek,
 } from "date-fns";
+import { isSameDay } from "date-fns/fp";
 
 export const eventTypes: { key: EventType; label: string; color: string }[] = [
     { key: "workshop", label: "Workshop", color: "bg-green-500" },
@@ -45,4 +47,18 @@ export function getEventTypeLabel(type: EventType): string {
         annet: "Annet",
     };
     return labels[type] || type;
+}
+
+export function sortEventsByTime(events: Event[]): Event[] {
+    return events.sort((a, b) => {
+        const timeA = a.time.split("-")[0].trim();
+        const timeB = b.time.split("-")[0].trim();
+        const numA = parseInt(timeA.replace(":", ""));
+        const numB = parseInt(timeB.replace(":", ""));
+        return numA - numB;
+    });
+}
+
+export function getEventsForDay(events: Event[], date: Date): Event[] {
+    return events.filter((event) => isSameDay(event.date, date));
 }

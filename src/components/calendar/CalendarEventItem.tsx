@@ -5,7 +5,7 @@ import {
     HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { Button } from "@/components/ui/button";
-import { Clock, LocateIcon, LocationEdit, MapPin } from "lucide-react";
+import { Clock, MapPin } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function CalendarEventItem({

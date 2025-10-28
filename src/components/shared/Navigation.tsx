@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
 import { motion } from "framer-motion";
 
-interface CalendarNavigationProps {
+interface NavigationProps {
     year: number;
     month: number;
     onPreviousMonth: () => void;
@@ -11,13 +11,13 @@ interface CalendarNavigationProps {
     onToday: () => void;
 }
 
-export default function CalendarNavigation({
+export default function Navigation({
     year,
     month,
     onPreviousMonth,
     onNextMonth,
     onToday,
-}: CalendarNavigationProps) {
+}: NavigationProps) {
     const monthNames = [
         "Januar",
         "Februar",

@@ -1,11 +1,11 @@
 "use client";
-import { mockEvents } from "@/data/mock-events";
 import {
-    eventTypes,
     getCalendarDays,
     getEventColor,
+    getEventsForDay,
+    sortEventsByTime,
 } from "@/lib/calendar/calendar-helpers";
-import { isSameDay, isToday } from "date-fns";
+import { isToday } from "date-fns";
 import { Event, EventType } from "../../interfaces/event";
 import CalendarEventItem from "./CalendarEventItem";
 import CalendarLegend from "./CalendarLegend";
@@ -13,17 +13,23 @@ import { isSameMonth } from "date-fns/fp";
 
 export type EventTypeCountMap = Record<EventType, number>;
 
-export default function CalendarView({
+export default function CalendarGrid({
     year,
     month,
+    events,
 }: {
     year: number;
     month: number;
+    events: Event[];
 }) {
     const day_labels = ["Man", "Tir", "Ons", "Tor", "Fre", "Lør", "Søn"];
     const calendar_days = getCalendarDays(year, month);
 
-    const mappedEventTypes: EventTypeCountMap = mockEvents
+    const monthEvents = events.filter((event) =>
+        isSameMonth(event.date, new Date(year, month)),
+    );
+
+    const mappedEventTypes: EventTypeCountMap = monthEvents
         .filter((event) => isSameMonth(event.date, new Date(year, month)))
         .reduce((accumulator: EventTypeCountMap, event: Event) => {
             const key: EventType = event.type;
@@ -49,21 +55,9 @@ export default function CalendarView({
 
                     {calendar_days.map((day, i) => {
                         // Filter events for this specific day
-                        const dayEvents: Event[] = mockEvents
-                            .filter((event) => isSameDay(event.date, day.date))
-                            .sort((a, b) => {
-                                // 10:00 - 20:00
-                                // 09:30 - 12:00
-                                const timeA = a.time.split("-")[0].trim(); // 1000
-                                const timeB = b.time.split("-")[0].trim(); // 0930
-
-                                // Convert to comparable format (remove colon)
-                                const numA = parseInt(timeA.replace(":", ""));
-                                const numB = parseInt(timeB.replace(":", ""));
-
-                                // 1000 - 0930
-                                return numA - numB;
-                            });
+                        const dayEvents = sortEventsByTime(
+                            getEventsForDay(monthEvents, day.date),
+                        );
 
                         return (
                             <div

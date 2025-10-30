@@ -46,10 +46,10 @@ export default function CalendarEventItem({
                 </Button>
             </HoverCardTrigger>
             <HoverCardContent
-                className="w-auto min-w-[200px] max-w-md"
+                className="rounded-md px-2 py-1 text-xs text-white transition-all hover:opacity-90"
                 color="blue"
             >
-                <ul className="flex flex-col gap-3 coltext-lg">
+                <ul className="flex flex-col gap-3 text-lg">
                     <li className="font-bold">{name}</li>
                     <li className="flex flex-row gap-4">
                         <span>

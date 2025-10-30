@@ -15,7 +15,7 @@ export default function CalendarLegend({
 }: CalendarLegendProps) {
     return (
         <div
-            className={`flex flex-wrap items-center gap-4 ${className}`}
+            className="mb-4 flex flex-wrap gap-4"
             role="list"
             aria-label="Calendar legend"
         >
@@ -24,13 +24,10 @@ export default function CalendarLegend({
                     <div
                         key={type.key}
                         role="listitem"
-                        className={`flex items-center gap-2 `}
+                        className="flex items-center gap-2"
                     >
-                        <span
-                            aria-hidden
-                            className={`inline-block w-3 h-3 rounded-full ${type.color}`}
-                        />
-                        <span className="text-lg text-gray-900">
+                        <div className={`h-3 w-3 rounded-sm ${type.color}`} />
+                        <span className="text-lg text-muted-foreground">
                             {type.label} ({eventTypeCountMap[type.key] ?? 0})
                         </span>
                     </div>

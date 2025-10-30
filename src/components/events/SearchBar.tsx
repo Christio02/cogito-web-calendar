@@ -27,7 +27,7 @@ export default function Searchbar({ value, handleSearch }: SearchBarProps) {
             <span className="text-sm font-medium text-muted-foreground">
                 Søk
             </span>
-            <div className="relative">
+            <div className="relative focus:outline-[#13395b]">
                 <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                     type="search"
@@ -37,7 +37,7 @@ export default function Searchbar({ value, handleSearch }: SearchBarProps) {
                     }}
                     placeholder="Søk etter navn, beskrivelse eller sted..."
                     aria-label="Søk etter arrangementer"
-                    className="pl-9 rounded-lg"
+                    className="pl-9 rounded-lg focus-visible:ring-[#13395b]"
                 />
             </div>
         </div>

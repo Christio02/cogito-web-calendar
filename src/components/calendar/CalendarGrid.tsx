@@ -40,13 +40,13 @@ export default function CalendarGrid({
 
     return (
         <>
-            <div className="px-4">
+            <div className="w-full rounded-xl border border-border bg-card p-4 shadow-lg md:p-6">
                 <CalendarLegend eventTypeCountMap={mappedEventTypes} />
 
-                <div className="grid grid-cols-7 grid-auto-rows bg-gray-200 ">
+                <div className="grid grid-cols-7 gap-2 ">
                     {day_labels.map((day, i) => (
                         <div
-                            className="mr-4 bg-gray-100 p-2 text-center font-semibold text-sm"
+                            className="bg-muted/50 p-2 text-center font-semibold text-sm text-muted-foreground border-b border-border rounded-t-lg"
                             key={i}
                         >
                             {day}
@@ -61,14 +61,20 @@ export default function CalendarGrid({
 
                         return (
                             <div
-                                className={`bg-white border border-black min-h-24 p-1 flex flex-col focus-visible:ring ${
-                                    !day.isCurrentMonth
-                                        ? "opacity-40 bg-gray-50"
-                                        : ""
-                                } ${isToday(day.date) ? "ring-2 ring-blue-500" : ""} h-full`}
+                                className={`bg-card border border-border rounded-lg min-h-24 p-2 flex flex-col
+                                  transition-all duration-200 hover:shadow-md hover:border-primary/20 ${
+                                      !day.isCurrentMonth
+                                          ? "opacity-40 bg-muted/30"
+                                          : ""
+                                  } ${isToday(day.date) ? "ring-2 ring-primary bg-primary/5" : ""} h-full`}
                                 key={i}
                             >
-                                <div className="font-bold text-sm mb-1 flex-none">
+                                <div
+                                    className={`
+                                  font-semibold text-sm mb-1 flex-none
+                                  ${isToday(day.date) ? "text-primary" : "text-foreground"}
+                                `}
+                                >
                                     {day.date.getDate()}
                                 </div>
 

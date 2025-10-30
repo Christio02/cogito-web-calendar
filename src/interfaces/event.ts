@@ -1,3 +1,4 @@
+import { User } from "@/interfaces/user";
 export type EventType =
     | "workshop"
     | "nyhet"
@@ -15,7 +16,7 @@ export interface Event {
     location: string;
     description: string;
     maxAtendees: number;
-    atendees: string[];
+    atendees: User[];
 }
 
 export interface CalendarEventItemProps {

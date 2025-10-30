@@ -44,7 +44,7 @@ export default function ListControls({
     resultCount,
 }: ListControlsProps) {
     return (
-        <div className="space-y-4">
+        <aside className="space-y-4">
             {/* desktop: single row layout */}
             <div className="hidden md:flex md:items-end md:gap-3">
                 <div className="flex-1">
@@ -115,6 +115,6 @@ export default function ListControls({
                     {resultCount} arrangementer
                 </div>
             )}
-        </div>
+        </aside>
     );
 }

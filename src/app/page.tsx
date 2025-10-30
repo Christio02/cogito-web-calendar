@@ -1,7 +1,7 @@
 "use client";
 
 import CalendarGrid from "@/components/calendar/CalendarGrid";
-import Navigation from "@/components/shared/Navigation";
+import CalendarNavigation from "@/components/shared/CalendarNavigation";
 import EventList from "@/components/events/EventList";
 import ListControls from "@/components/events/ListControls";
 import { Button } from "@/components/ui/button";
@@ -125,7 +125,7 @@ export default function Home() {
     }, [timeWindow, searchTerm, filterType, sortBy, year, month]);
 
     return (
-        <main className="min-h-screen bg-gradient-to-b from-[#13395b] to-[#1a4a7a] py-5 px-4">
+        <main className="min-h-screen bg-background p-4 md:p-8">
             <div className="flex justify-center gap-4 mb-4">
                 <Button
                     onClick={() => setView("calendar")}
@@ -141,7 +141,7 @@ export default function Home() {
                 </Button>
             </div>
 
-            <section className="bg-white rounded-3xl shadow-2xl p-8 mb-8">
+            <section className="mx-auto max-w-7xl">
                 {/* list controls(only show in list view) */}
                 {view === "list" && (
                     <div className="mb-6">
@@ -162,7 +162,7 @@ export default function Home() {
 
                 {view === "calendar" ? (
                     <>
-                        <Navigation
+                        <CalendarNavigation
                             year={year}
                             month={month}
                             onPreviousMonth={handlePreviousMonth}

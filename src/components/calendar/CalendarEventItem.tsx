@@ -1,16 +1,70 @@
 import { CalendarEventItemProps } from "../../interfaces/event";
+import {
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import { Button } from "@/components/ui/button";
+import { Clock, MapPin } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function CalendarEventItem({
-  id,
-  name,
-  color,
+    id,
+    name,
+    time,
+    location,
+    color,
+    isSingle,
 }: CalendarEventItemProps) {
-  return (
-    <div
-      className={`${color} rounded px-1 py-0.5 text-xs text-white truncate cursor-pointer hover:opacity-80 transition-opacity`}
-      title={name}
-    >
-      {name}
-    </div>
-  );
+    const router = useRouter();
+
+    const handleNavigation = () => {
+        router.push(`/events/${id}`);
+    };
+
+    return (
+        <HoverCard openDelay={0} closeDelay={0}>
+            <HoverCardTrigger
+                className={`${isSingle ? "block w-full h-full text-pretty" : ""} `}
+                asChild
+            >
+                <Button
+                    aria-label={`${name}`}
+                    className={`${color} ${isSingle ? "h-full" : ""} w-full min-w-0 justify-start text-left`}
+                    onClick={handleNavigation}
+                >
+                    <span
+                        className={[
+                            "block flex-1 min-w-0",
+                            isSingle
+                                ? "whitespace-normal break-words" // multi-line wrap
+                                : "truncate", // single-line ellipsis
+                        ].join(" ")}
+                    >
+                        {name}
+                    </span>
+                </Button>
+            </HoverCardTrigger>
+            <HoverCardContent
+                className="rounded-md px-2 py-1 text-xs text-white transition-all hover:opacity-90"
+                color="blue"
+            >
+                <ul className="flex flex-col gap-3 text-lg">
+                    <li className="font-bold">{name}</li>
+                    <li className="flex flex-row gap-4">
+                        <span>
+                            <Clock />
+                        </span>
+                        {time}
+                    </li>
+                    <li className="flex flex-row gap-4">
+                        <span>
+                            <MapPin />
+                        </span>
+                        {location}
+                    </li>
+                </ul>
+            </HoverCardContent>
+        </HoverCard>
+    );
 }
